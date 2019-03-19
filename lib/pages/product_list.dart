@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'edit.dart';
-
 import 'package:scoped_model/scoped_model.dart';
-import 'package:flutter_course/scoped-models/main.dart';
 
-class ListPage extends StatelessWidget {
+import './product_edit.dart';
+import '../scoped-models/main.dart';
+
+class ProductListPage extends StatelessWidget {
   Widget _buildEditButton(BuildContext context, int index, MainModel model) {
     return IconButton(
       icon: Icon(Icons.edit),
@@ -14,15 +14,10 @@ class ListPage extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return EditPage();
+              return ProductEditPage();
             },
           ),
-        ).then(
-          (_) {
-            model.selectProduct(null);
-          },
         );
-        ;
       },
     );
   }
@@ -42,7 +37,7 @@ class ListPage extends StatelessWidget {
                 } else if (direction == DismissDirection.startToEnd) {
                   print('Swiped start to end');
                 } else {
-                  print('Other Swiping');
+                  print('Other swiping');
                 }
               },
               background: Container(color: Colors.red),
@@ -51,7 +46,7 @@ class ListPage extends StatelessWidget {
                   ListTile(
                     leading: CircleAvatar(
                       backgroundImage:
-                          AssetImage(model.allProducts[index].image),
+                          NetworkImage(model.allProducts[index].image),
                     ),
                     title: Text(model.allProducts[index].title),
                     subtitle:

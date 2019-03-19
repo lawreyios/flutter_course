@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'list.dart';
-import 'edit.dart';
+import './product_edit.dart';
+import './product_list.dart';
 
-class ManagePage extends StatelessWidget {
-
+class ProductsAdminPage extends StatelessWidget {
   Widget _buildSideDrawer(BuildContext context) {
     return Drawer(
       child: Column(
@@ -17,7 +16,7 @@ class ManagePage extends StatelessWidget {
             leading: Icon(Icons.shop),
             title: Text('All Products'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/products');
             },
           )
         ],
@@ -30,22 +29,25 @@ class ManagePage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: _buildSideDrawer(context),
         appBar: AppBar(
-          title: Text('Manage'),
+          title: Text('Manage Products'),
           bottom: TabBar(
             tabs: <Widget>[
-              Tab(text: 'Create Product', icon: Icon(Icons.create)),
-              Tab(text: 'My Products', icon: Icon(Icons.list))
+              Tab(
+                icon: Icon(Icons.create),
+                text: 'Create Product',
+              ),
+              Tab(
+                icon: Icon(Icons.list),
+                text: 'My Products',
+              ),
             ],
           ),
         ),
         body: TabBarView(
-          children: <Widget>[
-            EditPage(),
-            ListPage()
-          ],
+          children: <Widget>[ProductEditPage(), ProductListPage()],
         ),
-        drawer: _buildSideDrawer(context),
       ),
     );
   }
