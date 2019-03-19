@@ -17,7 +17,12 @@ class ListPage extends StatelessWidget {
               return EditPage();
             },
           ),
+        ).then(
+          (_) {
+            model.selectProduct(null);
+          },
         );
+        ;
       },
     );
   }
@@ -45,7 +50,8 @@ class ListPage extends StatelessWidget {
                 children: <Widget>[
                   ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: AssetImage(model.products[index].image),
+                      backgroundImage:
+                          AssetImage(model.allProducts[index].image),
                     ),
                     title: Text(model.allProducts[index].title),
                     subtitle:

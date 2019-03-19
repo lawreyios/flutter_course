@@ -114,7 +114,7 @@ class _EditPageState extends State<EditPage> {
     );
   }
 
-  void _submitForm(Function addProduct, Function updateProduct,
+  void _submitForm(Function addProduct, Function updateProduct, Function setSelectedProduct,
       [int selectedProductIndex]) {
     if (!_formKey.currentState.validate()) {
       return;
@@ -130,12 +130,13 @@ class _EditPageState extends State<EditPage> {
         price: _formData['price']);
 
     if (selectedProductIndex == null) {
-      addProduct(_formData['title'], _formData['description'],
-          _formData['image'], _formData['price']);
+      addProduct(finalProduct.title, finalProduct.description,
+          finalProduct.image, finalProduct.price);
     } else {
-      updateProduct(finalProduct);
+      updateProduct(finalProduct.title, finalProduct.description,
+          finalProduct.image, finalProduct.price);
     }
-    Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, '/home').then((_) => setSelectedProduct(null));
   }
 
   Widget _buildSaveButton() {
@@ -144,7 +145,7 @@ class _EditPageState extends State<EditPage> {
         return RaisedButton(
           child: Text('Save'),
           textColor: Colors.white,
-          onPressed: () => _submitForm(model.addProduct, model.updateProduct,
+          onPressed: () => _submitForm(model.addProduct, model.updateProduct, model.selectProduct,
               model.selectedProductIndex),
         );
       },
