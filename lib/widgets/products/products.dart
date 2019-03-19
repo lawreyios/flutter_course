@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'productCard.dart';
+import 'product_card.dart';
 import 'package:flutter_course/scoped-models/main.dart';
 import 'package:flutter_course/models/product.dart';
 

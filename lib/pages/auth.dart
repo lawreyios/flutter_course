@@ -13,9 +13,9 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   final Map<String, dynamic> _formData = {
-    'email': null,
-    'password': null,
-    'acceptTerms': false
+    'email': 'test@gmail.com',
+    'password': 'testtest',
+    'acceptTerms': true
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -30,6 +30,7 @@ class _AuthPageState extends State<AuthPage> {
 
   Widget _buildEmailTextField() {
     return TextFormField(
+      initialValue: 'test@gmail.com',
       decoration: InputDecoration(
           labelText: 'E-Mail', filled: true, fillColor: Colors.white),
       keyboardType: TextInputType.emailAddress,
@@ -48,9 +49,10 @@ class _AuthPageState extends State<AuthPage> {
 
   Widget _buildPasswordTextField() {
     return TextFormField(
+      initialValue: 'testtest',
       decoration: InputDecoration(
           labelText: 'Password', filled: true, fillColor: Colors.white),
-      obscureText: true,
+      obscureText: true,      
       validator: (String value) {
         if (value.isEmpty || value.length < 6) {
           return 'Password invalid';
