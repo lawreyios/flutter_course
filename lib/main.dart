@@ -51,10 +51,10 @@ class _MyAppState extends State<MyApp> {
           if (pathElements[1] == 'product') {
             final String productId = pathElements[2];
             final Product product = model.allProducts.firstWhere((Product product) {
-
+              
             });
             return MaterialPageRoute<bool>(
-              builder: (BuildContext context) => ProductPage(),
+              builder: (BuildContext context) => ProductPage(product),
             );
           }
           return null;
