@@ -160,7 +160,7 @@ mixin ProductsModel on ConnectedProductsModel {
     });
   }
 
-  Future<Null> fetchProducts() {
+  Future<Null> fetchProducts({onlyForUser = false}) {
     _isLoading = true;
     notifyListeners();
     return http
@@ -187,7 +187,9 @@ mixin ProductsModel on ConnectedProductsModel {
                 .containsKey(_authenticatedUser.id));
         fetchedProductList.add(product);
       });
-      _products = fetchedProductList;
+      _products = onlyForUser ? fetchedProductList.where((Product product) {
+        return product.userId == _authenticatedUser.id;
+      }).toList() : fetchedProductList;
       _isLoading = false;
       notifyListeners();
       _selProductId = null;
@@ -219,7 +221,7 @@ mixin ProductsModel on ConnectedProductsModel {
           body: json.encode(true));
     } else {
       response = await http.delete(
-          'https://flutter-products-6d893.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.json?auth=${_authenticatedUser.token}');
+          'https://flutter-products-6d893.firebaseio.com/products/${selectedProduct.id}/wishlistUsers/${_authenticatedUser.id}.jsson?auth=${_authenticatedUser.token}');
     }
     if (response.statusCode != 200 && response.statusCode != 201) {
       final Product updatedProduct = Product(
